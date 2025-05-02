@@ -46,7 +46,7 @@ const deleteProductById = async (id) => {
 };
 
 deleteBtn.addEventListener("click", async () => {
-  const product = await deleteProductById();
+  const product = await deleteProductById(id);
   if (product) {
     confirmation.textContent = "Product was deleted successfully";
   }
