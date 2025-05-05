@@ -1,12 +1,6 @@
-const productsWrapper = document.getElementById("products-warpper");
+import { fetchProducts } from "./utils/fetch.js";
 
-const fetchProducts = async () => {
-  const response = await fetch(
-    `https://681068e327f2fdac24114000.mockapi.io/products`
-  );
-  const data = await response.json();
-  return data;
-};
+const productsWrapper = document.getElementById("products-warpper");
 
 const buildProducts = (product) => {
   product.sort((a, b) => {

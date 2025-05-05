@@ -1,3 +1,5 @@
+import { fetchProductById, deleteProductById } from "../utils/fetch.js";
+
 const title = document.getElementById("title");
 const price = document.getElementById("price");
 const city = document.getElementById("city");
@@ -10,14 +12,6 @@ const url = new URL(window.location.href);
 const id = url.searchParams.get("id");
 
 console.log(id);
-
-const fetchProductById = async (id) => {
-  const response = await fetch(
-    `https://681068e327f2fdac24114000.mockapi.io/products/${id}`
-  );
-  const data = await response.json();
-  return data;
-};
 
 const insertDataToScreen = (product) => {
   title.textContent = product.title;
@@ -34,20 +28,13 @@ const productsDisplay = async () => {
 };
 productsDisplay();
 
-const deleteProductById = async (id) => {
-  const response = await fetch(
-    `https://681068e327f2fdac24114000.mockapi.io/products/${id}`,
-    {
-      method: "DELETE",
-    }
-  );
-  const data = await response.json();
-  return data;
-};
-
 deleteBtn.addEventListener("click", async () => {
   const product = await deleteProductById(id);
   if (product) {
     confirmation.textContent = "Product was deleted successfully";
+
+    setTimeout(() => {
+      window.location.replace("../index.html");
+    }, 2000);
   }
 });

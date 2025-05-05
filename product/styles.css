@@ -89,4 +89,9 @@ h4 {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+
+  header nav ul {
+    gap: 2rem;
+    text-align: center;
+  }
 }

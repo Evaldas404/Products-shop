@@ -95,3 +95,27 @@ main h1 {
     transform: translateY(-5px);
     box-shadow: 3px 3px #073B3A;
   }
+
+  @media (max-width: 850px) {
+    .products-warpper {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+  }
+
+
+  @media (max-width: 768px) {
+  
+    header nav ul {
+      gap: 2rem;
+      text-align: center;
+    }
+  
+  }
+
+  @media (max-width: 580px) {
+    .products-warpper {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }

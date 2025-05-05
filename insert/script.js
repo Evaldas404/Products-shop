@@ -1,65 +1,38 @@
-const title = document.getElementById("title");
-const price = document.getElementById("price");
-const location = document.getElementById("location");
-const imageUrl = document.getElementById("image-url");
-const description = document.getElementById("description");
+import { insertProduct } from "../utils/fetch.js";
+import { inputRequirements } from "../utils/validations.js";
+
+const titleInput = document.getElementById("title");
+const priceInput = document.getElementById("price");
+const locationInput = document.getElementById("location");
+const imageUrlInput = document.getElementById("image-url");
+const descriptionInput = document.getElementById("description");
 const message = document.getElementById("message");
 const submitButton = document.getElementById("submit-button");
-const errorMessage = document.getElementById("error");
-
-const insertProduct = async () => {
-  const response = await fetch(
-    `https://681068e327f2fdac24114000.mockapi.io/products`,
-    {
-      method: "POST",
-      body: JSON.stringify(),
-      header: { "Content-Type": "application/json" },
-    }
-  );
-  const product = await response.json();
-  return product;
-};
 
 submitButton.addEventListener("click", async () => {
   const data = {
-    title: title.value,
-    price: price.value,
-    location: location.value,
-    imageUrl: imageUrl.value,
-    description: description.value,
-  };
-
-  const inputRequirements = () => {
-    let isError = false;
-
-    if (isNaN(data.price)) {
-      console.log("Price should be a number");
-      errorMessage.textContent = "Price should be a number";
-      isError = true;
-    }
-
-    if (
-      !data.title ||
-      !data.price ||
-      !data.location ||
-      !data.imageUrl ||
-      !data.description
-    ) {
-      console.log("Make sure all windows are filled");
-      errorMessage.textContent = "Make sure all windows are filled";
-      isError = true;
-    }
-    return isError;
+    title: titleInput.value,
+    price: +priceInput.value,
+    location: locationInput.value,
+    imageUrl: imageUrlInput.value,
+    description: descriptionInput.value,
   };
 
   const requirementsViolation = inputRequirements(data);
   if (requirementsViolation) {
+    message.style.color = "red";
+    message.textContent = "There was an input violation";
     return;
   }
 
   const product = await insertProduct(data);
 
   if (product) {
+    message.style.color = "green";
     message.textContent = "Product was added successfully";
+
+    setTimeout(() => {
+      window.location.replace("../index.html");
+    }, 2000);
   }
 });
